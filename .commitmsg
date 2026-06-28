@@ -1,0 +1,12 @@
+Add LASSO pipeline + full neobrutalism dashboard redesign
+
+- Complete Python data pipeline: ingestion, extraction, eligibility routing
+- Retry logic with exponential backoff for 429 rate limits
+- GPT-5.4-mini wound data extraction from clinical notes and assessments
+- Regex fallback parser for wound type, stage, location, measurements, drainage
+- LASSO dashboard: dark neobrutalist UI optimized for TV presentation
+- Animated stat cards (count-up), staggered table row animations, shimmer title
+- AI Pipeline Panel with Manual / Autonomous mode toggle and live log stream
+- Patient detail modal with wound info, measurements, coverage, clinical note
+- Routing engine: auto_accept / flag_for_review / reject with plain-English reasons
+- Vercel serverless API functions: /api/run_pipeline and /api/results
