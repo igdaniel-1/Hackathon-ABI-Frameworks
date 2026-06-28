@@ -2,17 +2,19 @@
   "version": 2,
   "builds": [
     {
+      "src": "api/**/*.py",
+      "use": "@vercel/python"
+    },
+    {
       "src": "package.json",
       "use": "@vercel/static-build",
-      "config": { "outputDirectory": "build" }
+      "config": {
+        "outputDirectory": "build"
+      }
     }
   ],
-  "rewrites": [
-    { "source": "/pcc/:path*", "destination": "https://hackathon.prod.pulsefoundry.ai/pcc/:path*" },
-    { "source": "/health", "destination": "https://hackathon.prod.pulsefoundry.ai/health" }
-  ],
   "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }

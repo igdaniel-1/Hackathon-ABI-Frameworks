@@ -5,11 +5,7 @@ import StatsBar from './StatsBar';
 import AIPipelinePanel from './AIPipelinePanel';
 import PatientDetail from './PatientDetail';
 
-function pccUrl(path, params = {}) {
-  const qs = new URLSearchParams(params);
-  const query = qs.toString();
-  return `${path}${query ? '?' + query : ''}`;
-}
+const API_BASE = 'https://hackathon.prod.pulsefoundry.ai';
 
 export default function Dashboard() {
   const [results, setResults] = useState([]);
@@ -57,7 +53,7 @@ export default function Dashboard() {
 
       for (const fid of facilities) {
         addLog(`Fetching Facility ${fid === 101 ? 'A' : fid === 102 ? 'B' : 'C'} (id=${fid})...`);
-        const patients = await fetchWithRetry(pccUrl('/pcc/patients', { facility_id: fid }));
+        const patients = await fetchWithRetry(`${API_BASE}/pcc/patients?facility_id=${fid}`);
         allPatients = allPatients.concat(patients);
         addLog(`${patients.length} patients loaded from Facility ${fid === 101 ? 'A' : fid === 102 ? 'B' : 'C'}`, 'success');
       }
@@ -73,10 +69,10 @@ export default function Dashboard() {
         const p = sample[i];
         try {
           const [diagnoses, coverage, notes, assessments] = await Promise.all([
-            fetchWithRetry(pccUrl('/pcc/diagnoses', { patient_id: p.patient_id })),
-            fetchWithRetry(pccUrl('/pcc/coverage', { patient_id: p.patient_id })),
-            fetchWithRetry(pccUrl('/pcc/notes', { patient_id: p.id })),
-            fetchWithRetry(pccUrl('/pcc/assessments', { patient_id: p.id })),
+            fetchWithRetry(`${API_BASE}/pcc/diagnoses?patient_id=${p.patient_id}`),
+            fetchWithRetry(`${API_BASE}/pcc/coverage?patient_id=${p.patient_id}`),
+            fetchWithRetry(`${API_BASE}/pcc/notes?patient_id=${p.id}`),
+            fetchWithRetry(`${API_BASE}/pcc/assessments?patient_id=${p.id}`),
           ]);
 
           const hasMCB = coverage.some(c => c.payer_code === 'MCB' && !c.effective_to);
@@ -433,21 +429,23 @@ export default function Dashboard() {
               background: 'var(--bg-card)',
               border: '3px solid #333',
               borderRadius: 'var(--radius)',
-              padding: '100px 40px',
+              padding: '40px 40px',
               textAlign: 'center',
               animation: 'fadeInUp 0.8s ease-out',
             }}>
-              <div style={{
-                fontSize: 72,
-                marginBottom: 28,
-                animation: 'pulse 2s ease-in-out infinite',
-              }}>🤠</div>
-              <h2 style={{ fontSize: 32, fontWeight: 800, marginBottom: 16, color: 'var(--gold)' }}>
-                Ready to Ride
-              </h2>
-              <p style={{ color: 'var(--gray)', fontSize: 20, maxWidth: 500, margin: '0 auto 36px', lineHeight: 1.5 }}>
-                LASSO will fetch patient data, extract wound details, and determine Medicare Part B billing eligibility.
-              </p>
+              <img
+                src="/lasso-architecture.png"
+                alt="LASSO Architecture Diagram"
+                style={{
+                  width: '100%',
+                  maxWidth: 900,
+                  borderRadius: 12,
+                  border: '2px solid #333',
+                  marginBottom: 36,
+                  display: 'block',
+                  margin: '0 auto 36px',
+                }}
+              />
               <button
                 onClick={runPipeline}
                 disabled={loading}
