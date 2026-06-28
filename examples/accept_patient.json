@@ -1,0 +1,52 @@
+{
+  "patient": {
+    "id": 1,
+    "facility_id": 101,
+    "patient_id": "FA-001",
+    "first_name": "Agnes",
+    "last_name": "Dunbar",
+    "birth_date": "1942-05-04",
+    "gender": "Female",
+    "primary_payer_code": "MCB"
+  },
+  "diagnoses": [
+    {
+      "id": 1,
+      "patient_id": "FA-001",
+      "icd10_code": "L89.152",
+      "icd10_description": "Pressure ulcer of sacral region, stage 2",
+      "clinical_status": "active",
+      "onset_date": "2026-04-10"
+    }
+  ],
+  "coverage": [
+    {
+      "id": 1,
+      "patient_id": "FA-001",
+      "payer_name": "Medicare Part B",
+      "payer_code": "MCB",
+      "payer_type": "Medicare B",
+      "effective_from": "2020-01-01T00:00:00",
+      "effective_to": null
+    }
+  ],
+  "notes": [
+    {
+      "id": 1,
+      "patient_id": 1,
+      "note_type": "Wound (SPN)",
+      "effective_date": "2026-05-10T09:00:00",
+      "note_text": "Wound Assessment Note\nLocation: Sacrum\nWound Type: Pressure Ulcer, Stage 2\nLength: 3.2 cm Width: 2.1 cm Depth: 0.4 cm\nDrainage: Moderate serosanguineous"
+    }
+  ],
+  "assessments": [
+    {
+      "id": 1,
+      "patient_id": 1,
+      "assessment_type": "Weekly Wound Information Sheet",
+      "status": "Complete",
+      "assessment_date": "2026-05-10",
+      "raw_json": "{\"wound_type\": \"pressure_ulcer\", \"stage\": 2, \"location\": \"Sacrum\", \"length_cm\": 3.2, \"width_cm\": 2.1, \"depth_cm\": 0.4, \"drainage_amount\": \"moderate\"}"
+    }
+  ]
+}
