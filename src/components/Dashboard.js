@@ -5,7 +5,11 @@ import StatsBar from './StatsBar';
 import AIPipelinePanel from './AIPipelinePanel';
 import PatientDetail from './PatientDetail';
 
-const API_BASE = 'https://hackathon.prod.pulsefoundry.ai';
+const PROXY = '/api/proxy';
+function pccUrl(endpoint, params = {}) {
+  const qs = new URLSearchParams({ endpoint, ...params });
+  return `${PROXY}?${qs.toString()}`;
+}
 
 export default function Dashboard() {
   const [results, setResults] = useState([]);
@@ -53,7 +57,7 @@ export default function Dashboard() {
 
       for (const fid of facilities) {
         addLog(`Fetching Facility ${fid === 101 ? 'A' : fid === 102 ? 'B' : 'C'} (id=${fid})...`);
-        const patients = await fetchWithRetry(`${API_BASE}/pcc/patients?facility_id=${fid}`);
+        const patients = await fetchWithRetry(pccUrl('/pcc/patients', { facility_id: fid }));
         allPatients = allPatients.concat(patients);
         addLog(`${patients.length} patients loaded from Facility ${fid === 101 ? 'A' : fid === 102 ? 'B' : 'C'}`, 'success');
       }
@@ -69,10 +73,10 @@ export default function Dashboard() {
         const p = sample[i];
         try {
           const [diagnoses, coverage, notes, assessments] = await Promise.all([
-            fetchWithRetry(`${API_BASE}/pcc/diagnoses?patient_id=${p.patient_id}`),
-            fetchWithRetry(`${API_BASE}/pcc/coverage?patient_id=${p.patient_id}`),
-            fetchWithRetry(`${API_BASE}/pcc/notes?patient_id=${p.id}`),
-            fetchWithRetry(`${API_BASE}/pcc/assessments?patient_id=${p.id}`),
+            fetchWithRetry(pccUrl('/pcc/diagnoses', { patient_id: p.patient_id })),
+            fetchWithRetry(pccUrl('/pcc/coverage', { patient_id: p.patient_id })),
+            fetchWithRetry(pccUrl('/pcc/notes', { patient_id: p.id })),
+            fetchWithRetry(pccUrl('/pcc/assessments', { patient_id: p.id })),
           ]);
 
           const hasMCB = coverage.some(c => c.payer_code === 'MCB' && !c.effective_to);
