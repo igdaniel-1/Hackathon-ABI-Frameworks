@@ -4,6 +4,10 @@ This deliverable covers the component whose scope starts after PCC data has alre
 
 ## Component Scope
 
+![User Interface](public/userinterface.png "User Interface for Demo Data")
+
+
+## Available Scripts
 Input: one patient's already-fetched data from four source families:
 
 - Demographics / patient identity
