@@ -5,6 +5,9 @@ Pulse Foundry Hackathon Group Project from June 28 2026
 https://hackathon-abi.vercel.app/
 
 
+![User Interface](public/userinterface.png "User Interface for Demo Data")
+
+
 ## Available Scripts
 
 In the project directory, you can run:
