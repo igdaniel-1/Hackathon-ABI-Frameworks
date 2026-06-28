@@ -1,4 +1,7 @@
 import React from 'react';
+import UserGrid from './UserGrid.tsx';
+import USER_DATA from './userData.json'
+
 
 function Dashboard() {
     return (
@@ -7,18 +10,7 @@ function Dashboard() {
           Patient Dashboard
         </p>
         <div id="dashboardMainContainer">
-            <div id="DashboardHeader">
-                <p>Current Patient Claims</p>
-            </div>
-            <div id="DashboardBody">
-                <div id="DashboardTitleRow"></div>
-                <div id="DashboardDisplayUserGrid">
-                    <li>user1</li>
-                    <li>user2</li>
-                    <li>user3</li>
-                </div>
-            </div>
-            
+            <UserGrid data={USER_DATA} /> 
         </div>
       </div>
     );

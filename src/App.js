@@ -1,12 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
-import Dashboard from './components/Dashboard.tsx';
+import UserGrid from './components/UserGrid.tsx';
+import USER_DATA from './components/userData.json'
+// import Dashboard from './components/Dashboard.tsx';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Dashboard/>
+        <UserGrid data={USER_DATA} /> 
       </header>
     </div>
   );

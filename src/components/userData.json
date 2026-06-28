@@ -1,0 +1,25 @@
+[{
+    "USER_ID":"001", 
+    "ACCEPTANCE_STATUS":"Accepted", 
+    "INJURY_TYPE":"pressure ulcer", 
+    "INSURANCE_TYPE":"Medicare Part B" 
+},
+{
+    "USER_ID":"002", 
+    "ACCEPTANCE_STATUS":"Pending", 
+    "INJURY_TYPE":"Diabetic Foot Ulcer", 
+    "INSURANCE_TYPE":"Medicare Part B" 
+},
+{
+    "USER_ID":"003", 
+    "ACCEPTANCE_STATUS":"Rejected", 
+    "INJURY_TYPE":"Broken Foot", 
+    "INSURANCE_TYPE":"Medicare Part B" 
+},
+{
+    "USER_ID":"004", 
+    "ACCEPTANCE_STATUS":"Accepted", 
+    "INJURY_TYPE":"Venous Ulcer", 
+    "INSURANCE_TYPE":"Medicare Part B" 
+}
+]
