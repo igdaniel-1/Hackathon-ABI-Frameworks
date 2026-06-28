@@ -5,10 +5,10 @@ import StatsBar from './StatsBar';
 import AIPipelinePanel from './AIPipelinePanel';
 import PatientDetail from './PatientDetail';
 
-const PROXY = '/api/proxy';
-function pccUrl(endpoint, params = {}) {
-  const qs = new URLSearchParams({ endpoint, ...params });
-  return `${PROXY}?${qs.toString()}`;
+function pccUrl(path, params = {}) {
+  const qs = new URLSearchParams(params);
+  const query = qs.toString();
+  return `${path}${query ? '?' + query : ''}`;
 }
 
 export default function Dashboard() {
